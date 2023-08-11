@@ -1,5 +1,9 @@
+resource "random_id" "radom_terraform" {
+  byte_length = 8
+}
+
 resource "aws_s3_bucket" "bucket_api_resources" {
-  bucket = lower("${var.project_name}-${var.project_environment}")
+  bucket = lower("bucket-${var.project_name}-${var.project_environment}-${random_id.radom_terraform.hex}")
   tags = {
     project     = var.project_name
     environment = var.project_environment
