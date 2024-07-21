@@ -1,7 +1,11 @@
 variable "project_name" {
+  type    = string
+  default = "test-cloudfront-s3"
 }
 
 variable "project_environment" {
+  type    = string
+  default = "development"
 }
 
 variable "cors_allowed_headers" {
@@ -45,6 +49,26 @@ variable "policy_block_public_policy" {
 }
 
 variable "policy_restrict_public_buckets" {
+  type    = bool
+  default = false
+}
+
+variable "price_class" {
+  type    = string
+  default = "PriceClass_100"
+}
+
+variable "viewer_protocol_policy" {
+  type    = string
+  default = "redirect-to-https"
+}
+
+variable "is_ipv6_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "compress" {
   type    = bool
   default = false
 }

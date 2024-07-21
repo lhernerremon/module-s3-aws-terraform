@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket_api_resources" {
-  bucket = lower("bucket-${var.project_name}-${var.project_environment}")
+  bucket = lower("bucket-${local.project}")
   tags = {
     project     = var.project_name
     environment = var.project_environment
@@ -25,4 +25,9 @@ resource "aws_s3_bucket_public_access_block" "allow_public_access_bucket_policy"
   ignore_public_acls      = var.policy_ignore_public_acls
   block_public_policy     = var.policy_block_public_policy
   restrict_public_buckets = var.policy_restrict_public_buckets
+}
+
+resource "aws_s3_bucket_policy" "s3_bucket_policy" {
+  bucket = aws_s3_bucket.bucket_api_resources.id
+  policy = data.aws_iam_policy_document.policy_bucket_cloudfront.json
 }
