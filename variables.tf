@@ -1,6 +1,5 @@
 variable "project_name" {
-  type    = string
-  default = "test-cloudfront-s3"
+  type = string
 }
 
 variable "project_environment" {

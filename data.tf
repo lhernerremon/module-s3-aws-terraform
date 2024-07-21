@@ -52,7 +52,7 @@ data "aws_iam_policy_document" "policy_bucket_cloudfront" {
     sid = "AllowIAMUser"
     principals {
       type        = "AWS"
-      identifiers = ["${aws_iam_user.api_user.arn}"]
+      identifiers = [aws_iam_user.api_user.arn]
     }
     actions = [
       "s3:GetObject",

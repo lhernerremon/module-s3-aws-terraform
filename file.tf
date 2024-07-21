@@ -13,7 +13,7 @@ resource "local_file" "aws_s3_bucket_name" {
   content  = aws_s3_bucket.bucket_api_resources.id
 }
 
-resource "local_file" "name" {
+resource "local_file" "cloudfront_domain_name" {
   filename = "api_key/cloudfront_domain.txt"
   content  = aws_cloudfront_distribution.s3_distribution.domain_name
 }
