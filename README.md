@@ -1,5 +1,8 @@
 # AWS S3 bucket Terraform module
 
+This terraform module will create a S3 bucket and a CloudFront distribution.
+Also an origin access identity in our S3 bucket, through IAM and CloudFront.
+
 ## Usage
 
 ```hcl
@@ -11,7 +14,7 @@ provider "aws" {
 ...
 
 module "s3_bucket" {
-  source  = "github.com/lhernerremon/module-s3-aws-terraform?ref=v0.0.1"
+  source  = "github.com/lhernerremon/module-s3-aws-terraform?ref=v1.0.0"
   project_name = "project"
   project_environment = "develop"
 }
@@ -33,6 +36,10 @@ module "s3_bucket" {
 | policy_ignore_public_acls | If S3 ignore public ACLs for this bucket. | `bool` | `false` | no |
 | policy_block_public_policy | If S3 url of the site to be added to the S3 CORS. | `bool` | `false` | no |
 | policy_restrict_public_buckets | If S3 should restrict public bucket policies for this bucket. | `bool` | `false` | no |
+| price_class | CloudFront, price class for this distribution. | `string` | `PriceClass_100` | no |
+| viewer_protocol_policy | CloudFront, protocol that users can use to access the files . | `string` | `redirect-to-https` | no |
+| is_ipv6_enabled | CloudFront, whether the IPv6 is enabled for the distribution. | `bool` | `true` | no |
+| compress | CloudFront, automatically compress content for web requests that include Accept-Encoding: gzip | `bool` | `false` | no |
 
 ## Outputs
 | Name | Description|
@@ -45,3 +52,5 @@ module "s3_bucket" {
 |------|-------------|:--------:|
 | access_key.txt | ./api_key | Text file with the key to access the bucket through IAM |
 | secret_key.txt | ./api_key | Text file with the secret key to the bucket using IAM |
+| bucket_name.txt | ./api_key | Text file with the name of the S3 bucket |
+| cloudfront_domain.txt | ./api_key | Text file with the domain name for CloudFront |
