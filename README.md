@@ -14,7 +14,7 @@ provider "aws" {
 ...
 
 module "s3_bucket" {
-  source  = "github.com/lhernerremon/module-s3-aws-terraform?ref=v0.0.1"
+  source  = "github.com/lhernerremon/module-s3-aws-terraform?ref=v1.0.0"
   project_name = "project"
   project_environment = "develop"
 }
