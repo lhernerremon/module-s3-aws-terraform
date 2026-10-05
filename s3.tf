@@ -1,8 +1,17 @@
 resource "aws_s3_bucket" "bucket_api_resources" {
-  bucket = lower("bucket-${local.project}")
+  bucket = local.bucket_name
   tags = {
+    Name        = "${local.project}-S3"
     project     = var.project_name
     environment = var.project_environment
+  }
+}
+
+resource "aws_s3_bucket_ownership_controls" "bucket_api_ownership" {
+  bucket = aws_s3_bucket.bucket_api_resources.id
+
+  rule {
+    object_ownership = "BucketOwnerPreferred"
   }
 }
 
@@ -25,9 +34,4 @@ resource "aws_s3_bucket_public_access_block" "allow_public_access_bucket_policy"
   ignore_public_acls      = var.policy_ignore_public_acls
   block_public_policy     = var.policy_block_public_policy
   restrict_public_buckets = var.policy_restrict_public_buckets
-}
-
-resource "aws_s3_bucket_policy" "s3_bucket_policy" {
-  bucket = aws_s3_bucket.bucket_api_resources.id
-  policy = data.aws_iam_policy_document.policy_bucket_cloudfront.json
 }
