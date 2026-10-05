@@ -9,11 +9,11 @@ resource "local_file" "api_user_access_key" {
 }
 
 resource "local_file" "aws_s3_bucket_name" {
-  filename = "api_key/bucket_name.txt"
+  filename = "api_key/${local.project}_bucket_name.txt"
   content  = aws_s3_bucket.bucket_api_resources.id
 }
 
 resource "local_file" "cloudfront_domain_name" {
-  filename = "api_key/cloudfront_domain.txt"
+  filename = "api_key/${local.project}_cloudfront_domain.txt"
   content  = aws_cloudfront_distribution.s3_distribution.domain_name
 }

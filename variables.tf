@@ -7,6 +7,11 @@ variable "project_environment" {
   default = "development"
 }
 
+variable "bucket_name" {
+  type    = string
+  default = null
+}
+
 variable "cors_allowed_headers" {
   type    = list(string)
   default = ["*"]
@@ -14,7 +19,7 @@ variable "cors_allowed_headers" {
 
 variable "cors_allowed_methods" {
   type    = list(string)
-  default = ["GET", "HEAD", "POST"]
+  default = ["GET", "HEAD", "PUT"]
 }
 
 variable "cors_expose_headers" {
@@ -69,5 +74,5 @@ variable "is_ipv6_enabled" {
 
 variable "compress" {
   type    = bool
-  default = false
+  default = true
 }
